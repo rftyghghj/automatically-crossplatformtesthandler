@@ -1,17 +1,22 @@
-function sortedListToBST(head) {
-  if (!head) return null;
-  if (!head.next) return new TreeNode(head.val);
-  let slow = head;
-  let fast = head;
-  let prev = null;
-  while (fast && fast.next) {
-    prev = slow;
-    slow = slow.next;
-    fast = fast.next.next;
+function shuffle(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there are elements remaining
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // Swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
   }
-  const root = new TreeNode(slow.val);
-  prev.next = null;
-  root.left = sortedListToBST(head);
-  root.right = sortedListToBST(slow.next);
-  return root;
+
+  return array;
 }
+
+const shuffledDeck = shuffle([1, 2, 3, 4, 5]);
+console.log(shuffledDeck);
