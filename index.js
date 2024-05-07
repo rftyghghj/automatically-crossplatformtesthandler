@@ -1,22 +1,31 @@
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there are elements remaining
-  while (currentIndex !== 0) {
-    // Pick a remaining element
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // Swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+function spiralOrder(matrix) {
+  if (matrix.length === 0) return [];
+  const result = [];
+  let top = 0;
+  let bottom = matrix.length - 1;
+  let left = 0;
+  let right = matrix[0].length - 1;
+  while (top <= bottom && left <= right) {
+    for (let i = left; i <= right; i++) {
+      result.push(matrix[top][i]);
+    }
+    top++;
+    for (let i = top; i <= bottom; i++) {
+      result.push(matrix[i][right]);
+    }
+    right--;
+    if (top <= bottom) {
+      for (let i = right; i >= left; i--) {
+        result.push(matrix[bottom][i]);
+      }
+      bottom--;
+    }
+    if (left <= right) {
+      for (let i = bottom; i >= top; i--) {
+        result.push(matrix[i][left]);
+      }
+      left++;
+    }
   }
-
-  return array;
+  return result;
 }
-
-const shuffledDeck = shuffle([1, 2, 3, 4, 5]);
-console.log(shuffledDeck);
