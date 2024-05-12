@@ -1,3 +1,5 @@
-function averageArray(arr) {
-  return arr.reduce((acc, curr) => acc + curr, 0) / arr.length;
+function kthSmallest(matrix, k) {
+  const flatten = matrix.reduce((acc, row) => acc.concat(row), []);
+  flatten.sort((a, b) => a - b);
+  return flatten[k - 1];
 }
